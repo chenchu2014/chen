@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3757893752">
+    <data-source source="LOCAL" name="MySQL - chiplibrary@localhost" uuid="5064c8cb-f0aa-423b-8edf-4fa88bda6791">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/chiplibrary</jdbc-url>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
+      <libraries>
+        <library>
+          <url>file://C:/Program Files (x86)/MySQL/Connector.J 5.1/mysql-connector-java-5.1.33-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Oracle - orcl@10.104.4.112" uuid="58b615cd-3c12-4e7b-be93-9b9790186aec">
+      <driver-ref>oracle</driver-ref>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//10.104.4.112:1521/orcl</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://D:/oracle jdbc/ojdbc6.jar</url>
+        </library>
+        <library>
+          <url>file://D:/oracle jdbc/ojdbc6_g.jar</url>
+        </library>
+        <library>
+          <url>file://D:/oracle jdbc/ojdbc6dms_g.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Oracle - orcl@10.76.19.82" uuid="0f7f6850-3f6a-4e20-9e31-4ff079802e19">
+      <driver-ref>oracle</driver-ref>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//10.76.19.82:1521/orcl</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://D:/oracle jdbc/ojdbc6.jar</url>
+        </library>
+        <library>
+          <url>file://D:/oracle jdbc/ojdbc6_g.jar</url>
+        </library>
+        <library>
+          <url>file://D:/oracle jdbc/ojdbc6dms_g.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,36 @@
+<h2 class="sub-header"><b>ADE7758</b>&nbsp;远程固件升级</h2>
+
+<form class="form-inline" action="ade7758SoftwareFileUpload.do" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" class="form-control" name="software" required>
+        <button type="submit" class="btn btn-default">提交新固件</button>
+    </div>
+
+    <div class="form-group col-sm-offset-1">
+        <label>固件版本：</label><strong>{{software.version}}</strong>
+        <label>固件大小：</label><strong>{{software.size|number:2}}KB</strong>
+        <button class="btn btn-danger" ng-click="clearSoftwareFile()">清除固件</button>
+    </div>
+</form>
+
+<hr>
+
+<table data-toggle="table"
+       data-url="/ChinaOil/findAde7758Info.do"
+       data-pagination="true"
+       data-side-pagination="server"
+       data-page-list="[10, 20, 50]"
+       data-show-refresh="true"
+       data-search="true">
+    <thead>
+    <tr>
+        <th data-field="address">井号</th>
+        <th data-field="version">固件版本</th>
+        <th data-field="lastTime">最后连接时间</th>
+    </tr>
+    </thead>
+</table>
+
+<script>
+    $('table').bootstrapTable({locale: 'zh-US'});
+</script>

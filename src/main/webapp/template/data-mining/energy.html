@@ -1,0 +1,78 @@
+<div class="blog-header">
+    <h1 class="blog-title">能量模型</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-sm-8 blog-main">
+
+        <div class="blog-post">
+            <p class="blog-post-meta">2015.8.24 <a href="#">鲁畅</a></p>
+            <h3 class="blog-post-title">研究背景</h3>
+            <p class="blog-p"> 有杆抽油系统工作的时候是一个能量不断传递转化的过程，由于实际的工作环境不是理想的，故在此过程中会有一定的能量损失。随着油田开发的不断深入，这种损失对于采油成本的浪费很大，建立有杆抽油机的能量模型并进一步开展关于能耗与节能技术研究对油田节能降耗及高效开发具有很深的现实意义。</p>
+            <p class="blog-p">同时建立一个抽油机能量模型可以更方便的让我们了解抽油机各个部分的能耗情况，更重要的是我们可以通过测量数据的统计计算以及一些参考文献所提供的标准理想值与实际测的的数据进行比较从而较为准确的估计系统现阶段的运行状态并在与预期值有较大偏差时找到最有可能产生偏差的部分以便进行迅速的修整。</p>
+            <img src="resource/images/energy_model.jpg" width="600" height="460">
+            <p>节点含义</p>
+            <ol>
+                <li class="blog-li">电机输入功率</li>
+                <li class="blog-li">电机输出功率</li>
+                <li class="blog-li">扭矩处功率</li>
+                <li class="blog-li">悬点处做功</li>
+                <li class="blog-li">泵功率</li>
+                <li class="blog-li">水利功率</li>
+            </ol>
+            <hr>
+            <h3 class="blog-post-title">理论知识及建模过程</h3>
+            <p class="blog-p">polyfit函数是一个曲线拟合函数：<strong>已知离散点上的数据集，即已知在点集上的函数值，构造一个解析函数是在原离散点上尽量接近给定值。</strong>原理是最小二乘法：研究两个变量的相互关系时，通常可以得到一系列成对的数据，在去定的函数类中，例如一次函数，二次函数等，求p (x)∈这个函数类，使误差的平方和的期望最小。从几何上讲就是寻求给定点与曲线的距离平方和最小的曲线y＝p  (x)。函数p (x)称为拟合函数或最小二乘解。</p>
+            <p class="blog-p">利用我们从大港油田采集回的相关数据，我们可以收集到某一口井不同时间，不同节点的各部分效率及损失数据并整理入一个excel表格中，在Matlab中将整个excel表格导入并利用Matlab中polyfit函数及<strong>控制变量法</strong>对得到的数据进行曲线拟合从而得到直观的曲线和相应的曲线数学表达式。</p>
+            <ol>
+                <li class="blog-li">我们首先对数据的各部分效率值进行评判是否达到标准值，如果不到标准值，则停止计算并输出不达标部分；如果各项达标，则对数据进行处理并画图。</li>
+                <li class="blog-li">我们知道系统效率等于各个节点的效率的总乘积，我们将约等于百分之百且基本稳定的效率简化为一，则最终</li>
+            </ol>
+            <blockquote>
+                <p>系统效率＝电机效率*四连杆及传动部分效率*抽油杆效率*抽油泵效率</p>
+            </blockquote>
+            <p class="blog-p">我们需要计算除了作为自变量的效率以外的其他部分的效率积并找出积基本相等的一些点把对应的自变量效率和作为因变量的系统效率制成二维数组，得到一组点集。进而利用polyfit函数得到的曲线可以较为清晰的显示出横纵坐标间的关系：从我们得到的一次曲线的斜率大小可以定性的分析不同节点效率变化对系统效率影响的大小，斜率越大意味着影响越大，斜率越小则反之。</p>
+            <hr>
+            <h3 class="blog-post-title">仿真结果</h3>
+            <p class="blog-p">我们会得到一幅含有四个部分效率分别对系统效率影响的一次函数图形的图和对应的函数的一次斜率从而判断出不同部分对系统效率的影响大小。类似于下面的结果，这是我们随机抽查的一个井的仿真结果</p>>
+            <img src="resource/images/analysis_result.png" width="600" height="350">
+            <ul>
+                <li class="blog-li">电机：0.4373</li>
+                <li class="blog-li">四连杆及传动部分：0.6350</li>
+                <li class="blog-li">抽油杆部分：0.4681</li>
+                <li class="blog-li">抽油泵：0.4126</li>
+            </ul>
+            <hr>
+            <h3 class="blog-post-title">结果分析</h3>
+            <p class="blog-p">从数学角度，假设每个部分之间的效率之间是相互独立的，则相关敏感性我们可以对每一部分求导求得。例如对电机效率求导，则可得到斜率值为四连杆及传动部分效率＊抽油杆效率＊抽油泵效率随时间有一定波动。从而可以推断出本身效率值越小，其余效率乘积越大的节点敏感性越高，对系统效率的影响也就越大。一般电机效率和泵效率都不会很低，所以这两部分的斜率不太高，即对系统效率的影响较小。</p>
+        </div><!-- /.blog-post -->
+
+
+    </div><!-- /.blog-main -->
+
+    <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset">
+            <h4>摘要</h4>
+            <p>本文简要介绍了研究能量模型的意义以及研究的理论和过程。较为准确，清晰的得出不同部分效率对总系统效率的影响因素并用图形更为直观的展现出来。</p>
+        </div>
+        <div class="sidebar-module">
+            <h4>参考文献</h4>
+            <ol class="list-unstyled">
+                <li><a href="resource/pdf/有杆抽油系统的经济运行.pdf" target="_blank">有杆抽油系统的经济运行</a></li>
+                <li><a href="resource/pdf/有杆抽油系统井下能耗研究.pdf" target="_blank">有杆抽油系统井下能耗研究</a></li>
+                <li><a href="resource/pdf/有杆抽油系统能耗评价专家系统研究.pdf" target="_blank">有杆抽油系统能耗评价专家系统研究</a></li>
+                <li><a href="resource/pdf/有杆抽油系统能耗与节能技术研究_吴雪琴.caj" target="_blank">有杆抽油系统能耗与节能技术研究</a></li>
+            </ol>
+        </div>
+        <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Facebook</a></li>
+            </ol>
+        </div>
+    </div><!-- /.blog-sidebar -->
+
+</div><!-- /.row -->

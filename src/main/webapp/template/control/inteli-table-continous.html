@@ -1,0 +1,112 @@
+<h2 class="sub-header"><b>智能电表</b>&nbsp;曲线电参数据</h2>
+
+<table data-toggle="table"
+       data-url="/ChinaOil/findinteliTableContinousData.do"
+       data-pagination="true"
+       data-side-pagination="server"
+       data-page-list="[10, 20, 50]"
+       data-show-refresh="true"
+       data-search="true">
+    <thead>
+    <tr>
+        <th data-field="address">井号</th>
+        <th data-field="type">类型</th>
+        <th data-field="timestramp">时间</th>
+        <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+    </tr>
+    </thead>
+</table>
+
+<div class="modal" id="continous-modal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="demo-container" style="height: 400px">
+                    <div id="indicatorPlot" class="demo-placeholder" style="height: 400px"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('table').bootstrapTable({locale: 'zh-US'});
+
+    function actionFormatter(value, row, index) {
+        return [
+            '<a class="open" href="javascript:void(0)" title="打开" ng-click="open()">',
+            '<i class="glyphicon glyphicon-open"></i>',
+            '</a>',
+            '<a class="edit" href="javascript:void(0)" title="Edit" style="margin-left: 10px">',
+            '<i class="glyphicon glyphicon-edit"></i>',
+            '</a>',
+            '<a class="remove" href="javascript:void(0)" title="Remove" style="margin-left: 10px">',
+            '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>'
+        ].join('');
+    }
+
+    window.actionEvents = {
+        'click .open': function (e, value, row, index) {
+
+            $('#continous-modal').modal();
+
+            var time = new Date(row.timestramp.replace(/-/g, '/')).valueOf() + 8 * 3600000;
+
+            var line = [];
+            var i = 0;
+            var data = row.data.split(',');
+            if (row.type == '智能电表-载荷') {
+                for (; i < data.length - 1; i++) {
+                    line.push([time + i * 100, data[i] / 100])
+                }
+            } else {
+                for (; i < data.length - 1; i++) {
+                    line.push([time + i * 100, data[i]])
+                }
+            }
+
+            function euroFormatter(v, axis) {
+
+                var danWei = "";
+
+                switch (row.type) {
+                    case '智能电表-电流':
+                        danWei = "A";
+                        break;
+                    case '智能电表-载荷':
+                        danWei = "KN/m2";
+                        break;
+                    case '智能电表-有功功率':
+                        danWei = "W";
+                        break;
+                    case '智能电表-加速度y':
+                        danWei = "m/s2";
+                        break;
+                    case '智能电表-加速度x':
+                        danWei = "m/s2";
+                        break;
+                    case '智能电表-位移':
+                        danWei = "m";
+                        break;
+
+                }
+
+                return v.toFixed(axis.tickDecimals) + ' ' + danWei;
+            }
+
+            $.plot("#indicatorPlot", [{data: line, label: row.type}], {
+                xaxis: {
+                    mode: "time"
+                },
+                yaxis: {
+                    tickFormatter: euroFormatter
+                }
+            });
+        }
+    };
+</script>
+

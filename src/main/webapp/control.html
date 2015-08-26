@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>控制台</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="resource/css/myCSS/dashboard.css" rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="resource/js/ie/ie-emulation-modes-warning.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-app="control-module">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">油井智能诊断平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">控制台</a></li>
+                <li title="设置"><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
+                <li class="dropdown" title="用户">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="modifyPassword()">修改密码</a></li>
+                        <li><a href="/ChinaOil/logout">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" ng-controller="sliderController">
+            <ul class="nav nav-sidebar">
+                <li ng-class="{active:sliderBarFocus=='comm-log'}"><a href="#/comm-log"
+                                                                      ng-click="sliderBarFocus='comm-log'">通信日志</a></li>
+                <li class="dropdown" ng-class="{active:sliderBarFocus=='ade7758'}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">ADE7758<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/ade7758-dot" ng-click="sliderBarFocus='ade7758'">瞬时数据</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#/ade7758-continous" ng-click="sliderBarFocus='ade7758'">曲线数据</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#/ade7758-diagram" ng-click="sliderBarFocus='ade7758'">示工图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#/ade7758-update" ng-click="sliderBarFocus='ade7758'">固件更新</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" ng-class="{active:sliderBarFocus=='inteli'}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">智能电表<span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="width: 64%">
+                        <li><a href="#/inteli-table-dot" ng-click="sliderBarFocus='智能电表'">瞬时数据</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#/inteli-table-continous" ng-click="sliderBarFocus='智能电表'">曲线数据</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#/inteli-table-diagram" ng-click="sliderBarFocus='智能电表'">示工图</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href=""></a></li>
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+                <li><a href="">More navigation</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <!--<h1 class="page-header">Dashboard</h1>-->
+
+            <!--<div class="row placeholders">-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+            <!--<img data-src="holder.js/200x200/auto/sky" class="img-responsive"-->
+            <!--alt="Generic placeholder thumbnail">-->
+            <!--<h4>Label</h4>-->
+            <!--<span class="text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+            <!--<img data-src="holder.js/200x200/auto/vine" class="img-responsive"-->
+            <!--alt="Generic placeholder thumbnail">-->
+            <!--<h4>Label</h4>-->
+            <!--<span class="text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+            <!--<img data-src="holder.js/200x200/auto/sky" class="img-responsive"-->
+            <!--alt="Generic placeholder thumbnail">-->
+            <!--<h4>Label</h4>-->
+            <!--<span class="text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+            <!--<img data-src="holder.js/200x200/auto/vine" class="img-responsive"-->
+            <!--alt="Generic placeholder thumbnail">-->
+            <!--<h4>Label</h4>-->
+            <!--<span class="text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--</div>-->
+
+
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modifyPasswordModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/ChinaOil/modifyPassword.do" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="旧密码" name="oldPassword" class="form-control" required>
+                    <br>
+                    <input type="text" placeholder="新密码" name="newPassword" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="resource/js/ie/ie10-viewport-bug-workaround.js"></script>
+
+<script src="resource/js/angular-1.2.16/angular-1.2.16/angular.js"></script>
+<script src="resource/js/angular-1.2.16/angular-1.2.16/angular-route.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script src="resource/js/jquery.flot.js"></script>
+<script src="resource/js/jquery.flot.time.js"></script>
+
+
+<script>
+    angular.module('control-module', ['ngRoute'],
+            function ($httpProvider) {
+                // Use x-www-form-urlencoded Content-Type
+                $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+                /**
+                 * The workhorse; converts an object to x-www-form-urlencoded serialization.
+                 * @param {Object} obj
+                 * @return {String}
+                 */
+                var param = function (obj) {
+                    var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+                    for (name in obj) {
+                        value = obj[name];
+
+                        if (value instanceof Array) {
+                            for (i = 0; i < value.length; ++i) {
+                                subValue = value[i];
+                                fullSubName = name + '[' + i + ']';
+                                innerObj = {};
+                                innerObj[fullSubName] = subValue;
+                                query += param(innerObj) + '&';
+                            }
+                        } else if (value instanceof Object) {
+                            for (subName in value) {
+                                subValue = value[subName];
+                                fullSubName = name + '[' + subName
+                                + ']';
+                                innerObj = {};
+                                innerObj[fullSubName] = subValue;
+                                query += param(innerObj) + '&';
+                            }
+                        } else if (value !== undefined
+                                && value !== null)
+                            query += encodeURIComponent(name) + '='
+                            + encodeURIComponent(value) + '&';
+                    }
+
+                    return query.length ? query.substr(0,
+                            query.length - 1) : query;
+                };
+
+                // Override $http service's default transformRequest
+                $httpProvider.defaults.transformRequest = [function (data) {
+                    return angular.isObject(data)
+                    && String(data) !== '[object File]' ? param(data)
+                            : data;
+                }];
+            })
+
+            .config(['$routeProvider', function ($routeProvider) {
+                $routeProvider
+                        .when('/ade7758-dot', {
+                            controller: 'ade7758DotController',
+                            templateUrl: 'template/control/ade7758-dot.html'
+                        }).when('/inteli-table-dot', {
+                            controller: 'inteliTableDotController',
+                            templateUrl: 'template/control/inteli-table-dot.html'
+                        }).when('/comm-log', {
+                            controller: 'commLogController',
+                            templateUrl: 'template/control/comm-log.html'
+                        }).when('/ade7758-continous', {
+                            controller: 'ade7758ContinousController',
+                            templateUrl: 'template/control/ade7758-continous.html'
+                        }).when('/ade7758-diagram', {
+                            controller: 'ade7758DiagramController',
+                            templateUrl: 'template/control/ade7758-diagram.html'
+                        }).when('/ade7758-update', {
+                            controller: 'ade7758UpdateController',
+                            templateUrl: 'template/control/ade7758-update.html'
+                        }).when('/inteli-table-continous', {
+                            controller: 'inteliTableContinousController',
+                            templateUrl: 'template/control/inteli-table-continous.html'
+                        }).when('/inteli-table-diagram', {
+                            controller: 'inteliTableDiagramController',
+                            templateUrl: 'template/control/inteli-table-diagram.html'
+                        }).otherwise({redirectTo: '/comm-log'})
+            }])
+
+            .controller('inteliTableDiagramController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('ade7758DiagramController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('sliderController', ['$scope', '$location', function ($scope, $location) {
+                var path = $location.path();
+                if (path.charAt(0) == '/') {
+                    $scope.sliderBarFocus = path.substr(1, path.length - 1).split('-')[0];
+                } else {
+                    $scope.sliderBarFocus = 'comm-log';
+                }
+            }])
+
+            .controller('ade7758DotController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('ade7758ContinousController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('inteliTableDotController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('inteliTableContinousController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('commLogController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('ade7758UpdateController', ['$scope', 'ade7758SoftwareUpdateService', function ($scope, ade7758SoftwareUpdateService) {
+                $scope.software = ade7758SoftwareUpdateService.software;
+                ade7758SoftwareUpdateService.getSoftwareInfo();
+
+                $scope.clearSoftwareFile = function () {
+                    ade7758SoftwareUpdateService.clearSoftwareFile();
+                    ade7758SoftwareUpdateService.getSoftwareInfo();
+                }
+            }])
+
+            .factory('ade7758SoftwareUpdateService', ['$http', function ($http) {
+
+                var software = {
+                    version: null,
+                    size: null
+                };
+
+                return {
+                    software: software,
+                    clearSoftwareFile: function () {
+                        $http({
+                            url: '/ChinaOil/clearSoftwareFile.do',
+                            method: 'get'
+                        })
+                    }, getSoftwareInfo: function () {
+                        $http({
+                            url: '/ChinaOil/getSoftwareInfo.do',
+                            method: 'get'
+                        }).success(function (data) {
+                            software.version = data.version;
+                            if (data.size)
+                                software.size = data.size / 1024;
+                            else
+                                software.size = null;
+                        })
+                    }
+                }
+            }])
+
+    function modifyPassword() {
+        $('#modifyPasswordModal').modal();
+    }
+
+</script>
+
+
+</html>

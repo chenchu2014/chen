@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>用户管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body style="padding-top: 70px;">
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">油田智能诊断平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">用户管理</a></li>
+                <li><a href="control.html">控制台</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">数据挖掘 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="data-mining.html#/energy">抽油机节点效率敏感性</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="data-mining.html#/regression">基于历史数据的趋势分析</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="data-mining.html#/relationship">关联度的影响因素分析</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="data-mining.html#/optimization">多目标参数的油井调控优化</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" title="用户">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="modifyPassword()">修改密码</a></li>
+                        <li><a href="/ChinaOil/logout">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>用户管理</h1>
+
+        <p>添加，删除用户，修改用户名称和密码</p>
+    </div>
+
+    <h2 style="padding-bottom: 10px;border-bottom: 1px solid #eee;">用户管理</h2>
+
+    <div id="toolbar" class="btn-group">
+        <button type="button" class="btn btn-success" onclick="plus()">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>添加新用户</span>
+        </button>
+    </div>
+    <table data-toggle="table"
+           data-url="/ChinaOil/findUsers.do"
+           data-pagination="true"
+           data-side-pagination="server"
+           data-page-list="[10, 20, 50]"
+           data-show-refresh="true"
+           data-search="true"
+           data-toolbar="#toolbar">
+        <thead>
+        <tr>
+            <th data-field="username">用户名</th>
+            <th data-field="password">密码</th>
+            <th data-field="role">角色</th>
+            <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+
+<div class="modal fade" id="modifyPasswordModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/ChinaOil/modifyPassword.do" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="旧密码" name="oldPassword" class="form-control" required>
+                    <br>
+                    <input type="text" placeholder="新密码" name="newPassword" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加新用户</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="用户名" name="username" id="username" class="form-control" required>
+                    <br>
+                    <input type="text" placeholder="密码" name="password" id="password" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="addUser()">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="resource/js/ie/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script>
+
+    function actionFormatter(value, row, index) {
+        return [
+            '<a class="remove" href="javascript:void(0)" title="Remove" style="margin-left: 10px">',
+            '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>',
+            '<a class="remove" href="javascript:void(0)" title="Remove" style="margin-left: 10px">',
+            '<i class="glyphicon glyphicon-add"></i>',
+            '</a>'
+        ].join('');
+    }
+
+    window.actionEvents = {
+        'click .remove': function (e, value, row, index) {
+            $.ajax({
+                url: '/ChinaOil/admin/removeUser.do',
+                type: 'post',
+                data: {
+                    'username': row.username
+                },
+                dataType: 'json'
+            }).done(function (data) {
+                $('table').bootstrapTable('refresh');
+            });
+        }
+    };
+
+    function addUser() {
+        $.ajax({
+            url: '/ChinaOil/admin/addUser.do',
+            type: 'post',
+            data: {
+                'username': $('#username').val(),
+                'password': $('#password').val()
+            },
+            dataType: 'json'
+        }).done(function (data) {
+            $('table').bootstrapTable('refresh');
+        });
+    }
+
+    function plus() {
+        $('#addUserModal').modal();
+    }
+
+    function modifyPassword() {
+        $('#modifyPasswordModal').modal();
+    }
+</script>
+</body>
+</html>

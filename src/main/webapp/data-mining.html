@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>模型--算法&nbsp;&nbsp;介绍</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="resource/css/myCSS/blog.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="resource/js/ie/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-app="data-mining-module">
+
+<div class="blog-masthead" id="header">
+    <div class="container">
+        <nav class="blog-nav" ng-controller="headerController">
+            <a class="blog-nav-item" ng-class="{active:focus=='energy'}" ng-click="focus='energy'"
+               href="#/energy">抽油机节点效率敏感性</a>
+            <a class="blog-nav-item" ng-class="{active:focus=='regression'}" ng-click="focus='regression'"
+               href="#/regression">基于历史数据的趋势分析</a>
+            <a class="blog-nav-item" ng-class="{active:focus=='relationship'}" ng-click="focus='relationship'"
+               href="#/relationship">关联度的影响因素分析</a>
+            <a class="blog-nav-item" ng-class="{active:focus=='optimization'}" ng-click="focus='optimization'"
+               href="#/optimization">多目标参数的油井调控优化</a>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div ng-view></div>
+</div>
+<!-- /.container -->
+
+<footer class="blog-footer">
+    <p>北京理工大学片上系统实验室--大港油田电气自动化&nbsp;&nbsp;&nbsp;合作研究</p>
+</footer>
+
+</body>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="resource/js/ie/ie10-viewport-bug-workaround.js"></script>
+
+<script src="resource/js/angular-1.2.16/angular-1.2.16/angular.js"></script>
+<script src="resource/js/angular-1.2.16/angular-1.2.16/angular-route.js"></script>
+
+<script>
+    angular.module('data-mining-module', ['ngRoute'])
+
+            .config(['$routeProvider', function ($routeProvider) {
+                $routeProvider
+                        .when('/energy', {
+                            controller: 'energyController',
+                            templateUrl: 'template/data-mining/energy.html'
+                        }).when('/regression', {
+                            controller: 'regressionController',
+                            templateUrl: 'template/data-mining/regression.html'
+                        }).when('/relationship', {
+                            controller: 'relationshipController',
+                            templateUrl: 'template/data-mining/relationship.html'
+                        }).when('/optimization', {
+                            controller: 'optimizationController',
+                            templateUrl: 'template/data-mining/optimization.html'
+                        }).otherwise({redirectTo: '/energy'})
+            }])
+
+            .controller('energyController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('regressionController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('relationshipController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('optimizationController', ['$scope', function ($scope) {
+
+            }])
+
+            .controller('headerController', ['$scope', '$location', function ($scope, $location) {
+                var path = $location.path();
+                if (path.charAt(0) == '/') {
+                    $scope.focus = path.substr(1, path.length - 1);
+                }else{
+                    $scope.focus = 'energy';
+                }
+            }])
+</script>
+</html>

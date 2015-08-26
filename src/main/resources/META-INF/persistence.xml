@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="soc" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>cn.edu.bit.model.LogEntity</class>
+        <class>cn.edu.bit.model.MyUserEntity</class>
+        <class>cn.edu.bit.model.AddressInfoEntity</class>
+        <class>cn.edu.bit.model.Ade7758ContinousEntity</class>
+        <class>cn.edu.bit.model.Ade7758DotEntity</class>
+        <class>cn.edu.bit.model.InteliTableContinousEntity</class>
+        <class>cn.edu.bit.model.InteliTableDotEntity</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/chiplibrary"/>
+        </properties>
+    </persistence-unit>
+</persistence>

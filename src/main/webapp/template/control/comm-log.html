@@ -1,0 +1,27 @@
+
+<h2 class="sub-header"><b>日志</b></h2>
+
+<div class="table-responsive">
+    <table data-toggle="table"
+           data-url="/ChinaOil/findCommLogData.do"
+           data-pagination="true"
+           data-side-pagination="server"
+           data-page-list="[15, 30, 50]"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-columns="true">
+        <thead>
+        <tr>
+            <th data-field="address">井号</th>
+            <th data-field="type">类型</th>
+            <th data-field="message">信息</th>
+            <th data-field="timestramp">时间</th>
+        </tr>
+        </thead>
+    </table>
+
+</div>
+
+<script>
+    $('table').bootstrapTable({locale:'zh-US'});
+</script>
